@@ -24,6 +24,13 @@ final class FileHandler {
             delegate?.fileHandler(fileHander: self, didFailWithError: FileHandlingError.documentsPathNotFound)
             return
         }
+        
+        let sourceUrl = URL(fileURLWithPath: sourcePath)
+        guard let data = try? Data(contentsOf: sourceUrl) else {
+            delegate?.fileHandler(fileHander: self, didFailWithError: FileHandlingError.documentsPathNotFound)
+            return
+        }
+        
         fileHandlingQueue.async {
             do {
                 let filePaths = try self.fileManager.contentsOfDirectory(atPath: documentsPath)
@@ -33,16 +40,20 @@ final class FileHandler {
                 while proceed {
                     let fileName = "/file\(i).jpg"
                     let filePath = documentsPath.appending(fileName)
-                    if !self.fileManager.fileExists(atPath: filePath) {
+//                    if !self.fileManager.fileExists(atPath: filePath) {
                         do {
-                            try self.fileManager.copyItem(atPath: sourcePath, toPath: filePath)
+//                            try self.fileManager.copyItem(atPath: sourcePath, toPath: filePath)
+                            
+                            let dstUrl = URL(fileURLWithPath: filePath)
+                            try data.write(to: dstUrl)
+                            
                             self.delegate?.fileHandlerDidAddFile(fileHander: self)
                             self.incrementFilesStored()
                         } catch {
                             proceed = false
                             self.delegate?.fileHandlerDidFinishAddingFiles(fileHander: self)
                         }
-                    }
+//                    }
                     if self.shouldStop {
                         self.delegate?.fileHandlerDidCancel(fileHander: self)
                         return

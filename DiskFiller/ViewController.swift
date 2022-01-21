@@ -53,20 +53,32 @@ class ViewController: UIViewController, FileHandlerDelegate {
     @objc func userDidTap(stopButton: UIButton) {
         fileHandler.shouldStop = true
     }
+    
+    private var isUpdatePending = false
 
     private func updateDiskSpaceDisplay() {
-        if let availableSpace = diskSpaceHelper.availableDiskSpace {
-            updateDiskSpaceLabel(withDiskSpace: "\(availableSpace / (1024*1024)) Mb")
-        } else {
-            updateDiskSpaceLabel(withDiskSpace: "unknown")
+        
+        if isUpdatePending {
+            return
         }
-        if let fractionUsed = diskSpaceHelper.fractionDiskSpaceUsed {
-            diskSpaceProgess.progress = fractionUsed
-        }
-        if let numberOfFiles = fileHandler.numberOfFilesStored {
-            updateNumFilesLabel(withNumberOfFiles: "\(numberOfFiles)")
-        } else {
-            updateNumFilesLabel(withNumberOfFiles: "unknown")
+        
+        isUpdatePending = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
+            self.isUpdatePending = false
+
+            if let availableSpace = self.diskSpaceHelper.availableDiskSpace {
+                self.updateDiskSpaceLabel(withDiskSpace: "\(availableSpace / (1024*1024)) Mb")
+            } else {
+                self.updateDiskSpaceLabel(withDiskSpace: "unknown")
+            }
+            if let fractionUsed = self.diskSpaceHelper.fractionDiskSpaceUsed {
+                self.diskSpaceProgess.progress = fractionUsed
+            }
+            if let numberOfFiles = self.fileHandler.numberOfFilesStored {
+                self.updateNumFilesLabel(withNumberOfFiles: "\(numberOfFiles)")
+            } else {
+                self.updateNumFilesLabel(withNumberOfFiles: "unknown")
+            }
         }
     }
 

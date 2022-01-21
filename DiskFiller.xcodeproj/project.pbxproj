@@ -111,6 +111,7 @@
 				TargetAttributes = {
 					63361EBF1EC48C2F009CCA90 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = DU4B56LA6L;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -120,6 +121,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -282,13 +284,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DU4B56LA6L;
 				INFOPLIST_FILE = DiskFiller/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.fieldapps.DiskFiller;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eg10000.DiskFiller;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -296,13 +298,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DU4B56LA6L;
 				INFOPLIST_FILE = DiskFiller/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.fieldapps.DiskFiller;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eg10000.DiskFiller;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
